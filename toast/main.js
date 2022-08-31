@@ -43,7 +43,7 @@ addButton.addEventListener("click", function () {
   }
 
   toastP.innerText = content;
-  toasts.append(toast);
+  toasts.prepend(toast);
 
   let finalDuration;
 
