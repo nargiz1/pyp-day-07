@@ -8,28 +8,41 @@ let clearBtn = document.querySelector("#clear-button");
 let toasts = document.querySelector("#toasts");
 
 success.setAttribute("checked", true);
+
 addButton.addEventListener("click", function () {
-  let toast = document.createElement("p");
+  let toast = document.createElement("div");
   toast.classList.add("toast");
-  toast.innerText = messageContent.value;
+  let toastP = document.createElement("p");
+  toast.append(toastP);
+  let content;
+
+  if(messageContent.value != ""){
+    content = messageContent.value;
+  }
 
   if (success.getAttribute("checked")) {
     toast.classList.add("success-toast");
+    content = content?? "Success!"
   } else if (error.getAttribute("checked")) {
     toast.classList.add("error-toast");
+    content = content?? "Error!"
   }
 
   if (cancelable.getAttribute("checked")) {
     let cnclBtn = document.createElement("button");
     cnclBtn.classList.add("cancel-button");
     cnclBtn.innerText = "X";
+    console.log(cnclBtn);
+
     toast.append(cnclBtn);
 
     cnclBtn.addEventListener("click", function () {
       toasts.removeChild(toast);
     });
+
   }
 
+  toastP.innerText = content;
   toasts.append(toast);
 
   let finalDuration;
